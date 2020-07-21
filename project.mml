@@ -455,8 +455,9 @@ Layer:
               WHEN highway='road' THEN 'residential'  -- render "road" as residential
               WHEN highway='trunk' THEN 'motorway'  -- trunk as motorway, check can_bicycle if cyclable
               WHEN highway='trunk_link' THEN 'motorway_link'  -- trunk as motorway
-              WHEN highway='footway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
-              WHEN highway='bridleway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
+              WHEN highway IN ('path', 'footway', 'bridleway') AND bicycle='designated' then 'cycleway'
+              WHEN highway='footway' AND (bicycle='yes') THEN 'path'
+              WHEN highway='bridleway' AND (bicycle='yes') THEN 'path'
               WHEN highway!='bus_guideway' THEN highway
               ELSE NULL
             END,
@@ -483,6 +484,10 @@ Layer:
             WHEN tags->'psv' IS NULL AND tags->'motorcar' IS NULL AND tags->'bus' IS NULL AND tags->'motor_vehicle' IS NULL AND tags->'vehicle' IS NULL AND (access != 'no' OR access IS NULL) THEN 'yes'
             ELSE 'no'
           END AS motor_vehicle,
+          CASE
+            WHEN ((foot='designated' OR highway='footway') OR (horse='designated' OR highway='bridleway')) AND (bicycle='designated' OR highway='cycleway') THEN 'yes'
+            ELSE 'no'
+          END AS mixed_use,
           CASE
             WHEN tags->'cyclestreet' IN ('yes') THEN 'yes'
             WHEN tags->'bicycle_road' IN ('yes') THEN 'yes'
@@ -609,8 +614,9 @@ Layer:
               WHEN highway='road' THEN 'residential'  -- render "road" as residential
               WHEN highway='trunk' THEN 'motorway'  -- trunk as motorway, check can_bicycle if cyclable
               WHEN highway='trunk_link' THEN 'motorway_link'  -- trunk as motorway
-              WHEN highway='footway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
-              WHEN highway='bridleway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
+              WHEN highway IN ('path', 'footway', 'bridleway') AND bicycle='designated' then 'cycleway'
+              WHEN highway='footway' AND (bicycle='yes') THEN 'path'
+              WHEN highway='bridleway' AND (bicycle='yes') THEN 'path'
               WHEN highway!='bus_guideway' THEN highway
               ELSE NULL
             END,
@@ -636,6 +642,10 @@ Layer:
             WHEN tags->'psv' IS NULL AND tags->'motorcar' IS NULL AND tags->'bus' IS NULL AND tags->'motor_vehicle' IS NULL AND tags->'vehicle' IS NULL AND (access != 'no' OR access IS NULL) THEN 'yes'
             ELSE 'no'
           END AS motor_vehicle,
+          CASE
+            WHEN ((foot='designated' OR highway='footway') OR (horse='designated' OR highway='bridleway')) AND (bicycle='designated' OR highway='cycleway') THEN 'yes'
+            ELSE 'no'
+          END AS mixed_use,
           CASE
             WHEN tags->'cyclestreet' IN ('yes') THEN 'yes'
             WHEN tags->'bicycle_road' IN ('yes') THEN 'yes'
@@ -865,8 +875,9 @@ Layer:
               WHEN highway='road' THEN 'residential'  -- render "road" as residential
               WHEN highway='trunk' THEN 'motorway'  -- trunk as motorway, check can_bicycle if cyclable
               WHEN highway='trunk_link' THEN 'motorway_link'  -- trunk as motorway
-              WHEN highway='footway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
-              WHEN highway='bridleway' AND (bicycle='yes' OR bicycle='designated') THEN 'path'
+              WHEN highway IN ('path', 'footway', 'bridleway') AND bicycle='designated' then 'cycleway'
+              WHEN highway='footway' AND (bicycle='yes') THEN 'path'
+              WHEN highway='bridleway' AND (bicycle='yes') THEN 'path'
               WHEN highway!='bus_guideway' THEN highway
               ELSE NULL
             END,
@@ -893,6 +904,10 @@ Layer:
             WHEN tags->'psv' IS NULL AND tags->'motorcar' IS NULL AND tags->'bus' IS NULL AND tags->'motor_vehicle' IS NULL AND tags->'vehicle' IS NULL AND (access != 'no' OR access IS NULL) THEN 'yes'
             ELSE 'no'
           END AS motor_vehicle,
+          CASE
+            WHEN ((foot='designated' OR highway='footway') OR (horse='designated' OR highway='bridleway')) AND (bicycle='designated' OR highway='cycleway') THEN 'yes'
+            ELSE 'no'
+          END AS mixed_use,
           CASE
             WHEN tags->'cyclestreet' IN ('yes') THEN 'yes'
             WHEN tags->'bicycle_road' IN ('yes') THEN 'yes'
