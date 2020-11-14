@@ -475,16 +475,24 @@ Layer:
             ELSE NULL
           END AS maxspeed_kmh,
           CASE
-            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
-            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'yes'
-            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'yes'
+            -- First check if any motor vehicles have free access to the road using the test classes of cars, trucks, motorcycles, buses and taxis
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'goods', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'hgv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
             -- moped and mofa are not checked, since most countries that have separate access controls for them treat them as quasi-bicycles
-            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- TODO: style psv-only roads slightly differently
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'bus', tags->'psv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'taxi', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            -- Now we check for limited access (i.e. destination, delivery, forestry, agriculture)
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
+            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
+            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'limited'
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
             -- bus only needs to have its COALESCE chain go up to psv, because the next step would be motorcar, which is checked above
-            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'psv'
-            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'psv'
+            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'limited'
+            -- If none of our test classes of motor vehicles have either free or limited access, then the road must be closed to motor vehicles
             ELSE 'no'
           END AS motor_vehicle,
           CASE
@@ -652,16 +660,24 @@ Layer:
             ELSE NULL
           END AS maxspeed_kmh,
           CASE
-            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
-            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'yes'
-            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'yes'
+            -- First check if any motor vehicles have free access to the road using the test classes of cars, trucks, motorcycles, buses and taxis
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'goods', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'hgv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
             -- moped and mofa are not checked, since most countries that have separate access controls for them treat them as quasi-bicycles
-            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- TODO: style psv-only roads slightly differently
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'bus', tags->'psv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'taxi', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            -- Now we check for limited access (i.e. destination, delivery, forestry, agriculture)
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
+            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
+            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'limited'
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
             -- bus only needs to have its COALESCE chain go up to psv, because the next step would be motorcar, which is checked above
-            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'psv'
-            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'psv'
+            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'limited'
+            -- If none of our test classes of motor vehicles have either free or limited access, then the road must be closed to motor vehicles
             ELSE 'no'
           END AS motor_vehicle,
           CASE
@@ -915,16 +931,24 @@ Layer:
             ELSE NULL
           END AS maxspeed_kmh,
           CASE
-            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
-            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'yes'
-            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'yes'
+            -- First check if any motor vehicles have free access to the road using the test classes of cars, trucks, motorcycles, buses and taxis
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'goods', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'hgv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
             -- moped and mofa are not checked, since most countries that have separate access controls for them treat them as quasi-bicycles
-            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'yes'
-            -- TODO: style psv-only roads slightly differently
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'bus', tags->'psv', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            WHEN COALESCE(tags->'taxi', 'no') NOT IN ('no', 'private', 'destination', 'delivery', 'forestry', 'agricultural') THEN 'yes'
+            -- Now we check for limited access (i.e. destination, delivery, forestry, agriculture)
+            WHEN COALESCE(motorcar, tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
+            -- goods and hgv don't need COALESCE chains, because the next step would be motorcar, which is checked above
+            WHEN tags->'goods' NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'hgv' NOT IN ('no', 'private') THEN 'limited'
+            WHEN COALESCE(tags->'motorcycle', tags->'motor_vehicle', tags->'vehicle', access, 'yes') NOT IN ('no', 'private') THEN 'limited'
             -- bus only needs to have its COALESCE chain go up to psv, because the next step would be motorcar, which is checked above
-            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'psv'
-            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'psv'
+            WHEN COALESCE(tags->'bus', tags->'psv') NOT IN ('no', 'private') THEN 'limited'
+            WHEN tags->'taxi' NOT IN ('no', 'private') THEN 'limited'
+            -- If none of our test classes of motor vehicles have either free or limited access, then the road must be closed to motor vehicles
             ELSE 'no'
           END AS motor_vehicle,
           CASE

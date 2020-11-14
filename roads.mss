@@ -2225,6 +2225,18 @@
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
     }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_primary;
+        [zoom>=13] { motor/line-width: @rdz13_primary; }
+        [zoom>=14] { motor/line-width: @rdz14_primary; }
+        [zoom>=15] { motor/line-width: @rdz15_primary; }
+        [zoom>=16] { motor/line-width: @rdz16_primary; }
+        [zoom>=17] { motor/line-width: @rdz17_primary; }
+        [zoom>=18] { motor/line-width: @rdz18_primary; }
+        motor/line-dasharray: 6,6;
+    }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
         #tunnel { line-color: lighten(@mixed-cycle-fill, 10%); }
@@ -2292,6 +2304,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_primary_link;
+        [zoom>=13] { motor/line-width: @rdz13_primary_link; }
+        [zoom>=14] { motor/line-width: @rdz14_primary_link; }
+        [zoom>=15] { motor/line-width: @rdz15_primary_link; }
+        [zoom>=16] { motor/line-width: @rdz16_primary_link; }
+        [zoom>=17] { motor/line-width: @rdz17_primary_link; }
+        [zoom>=18] { motor/line-width: @rdz18_primary_link; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
@@ -2363,6 +2387,18 @@
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
     }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_secondary;
+        [zoom>=13] { motor/line-width: @rdz13_secondary; }
+        [zoom>=14] { motor/line-width: @rdz14_secondary; }
+        [zoom>=15] { motor/line-width: @rdz15_secondary; }
+        [zoom>=16] { motor/line-width: @rdz16_secondary; }
+        [zoom>=17] { motor/line-width: @rdz17_secondary; }
+        [zoom>=18] { motor/line-width: @rdz18_secondary; }
+        motor/line-dasharray: 6,6;
+    }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
         #tunnel { line-color: lighten(@mixed-cycle-fill, 10%); }
@@ -2430,6 +2466,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_secondary_link;
+        [zoom>=13] { motor/line-width: @rdz13_secondary_link; }
+        [zoom>=14] { motor/line-width: @rdz14_secondary_link; }
+        [zoom>=15] { motor/line-width: @rdz15_secondary_link; }
+        [zoom>=16] { motor/line-width: @rdz16_secondary_link; }
+        [zoom>=17] { motor/line-width: @rdz17_secondary_link; }
+        [zoom>=18] { motor/line-width: @rdz18_secondary_link; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
@@ -2500,6 +2548,18 @@
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
     }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_tertiary;
+        [zoom>=13] { motor/line-width: @rdz13_tertiary; }
+        [zoom>=14] { motor/line-width: @rdz14_tertiary; }
+        [zoom>=15] { motor/line-width: @rdz15_tertiary; }
+        [zoom>=16] { motor/line-width: @rdz16_tertiary; }
+        [zoom>=17] { motor/line-width: @rdz17_tertiary; }
+        [zoom>=18] { motor/line-width: @rdz18_tertiary; }
+        motor/line-dasharray: 6,6;
+    }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
         #tunnel { line-color: lighten(@mixed-cycle-fill, 10%); }
@@ -2568,6 +2628,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_tertiary_link;
+        [zoom>=13] { motor/line-width: @rdz13_tertiary_link; }
+        [zoom>=14] { motor/line-width: @rdz14_tertiary_link; }
+        [zoom>=15] { motor/line-width: @rdz15_tertiary_link; }
+        [zoom>=16] { motor/line-width: @rdz16_tertiary_link; }
+        [zoom>=17] { motor/line-width: @rdz17_tertiary_link; }
+        [zoom>=18] { motor/line-width: @rdz18_tertiary_link; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
@@ -2638,6 +2710,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_unclassified;
+        [zoom>=13] { motor/line-width: @rdz13_unclassified; }
+        [zoom>=14] { motor/line-width: @rdz14_unclassified; }
+        [zoom>=15] { motor/line-width: @rdz15_unclassified; }
+        [zoom>=16] { motor/line-width: @rdz16_unclassified; }
+        [zoom>=17] { motor/line-width: @rdz17_unclassified; }
+        [zoom>=18] { motor/line-width: @rdz18_unclassified; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
@@ -2710,6 +2794,18 @@
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
     }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_residential;
+        [zoom>=13] { motor/line-width: @rdz13_residential; }
+        [zoom>=14] { motor/line-width: @rdz14_residential; }
+        [zoom>=15] { motor/line-width: @rdz15_residential; }
+        [zoom>=16] { motor/line-width: @rdz16_residential; }
+        [zoom>=17] { motor/line-width: @rdz17_residential; }
+        [zoom>=18] { motor/line-width: @rdz18_residential; }
+        motor/line-dasharray: 6,6;
+    }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
         #tunnel { line-color: lighten(@mixed-cycle-fill, 10%); }
@@ -2778,6 +2874,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_service;
+        [zoom>=13] { motor/line-width: @rdz13_service; }
+        [zoom>=14] { motor/line-width: @rdz14_service; }
+        [zoom>=15] { motor/line-width: @rdz15_service; }
+        [zoom>=16] { motor/line-width: @rdz16_service; }
+        [zoom>=17] { motor/line-width: @rdz17_service; }
+        [zoom>=18] { motor/line-width: @rdz18_service; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
@@ -2848,6 +2956,18 @@
     [motor_vehicle='no'][can_bicycle!='no'] {
         line-color: @nomotor-fill;
         #tunnel { line-color: lighten(@nomotor-fill, 10%); }
+    }
+    [motor_vehicle='limited'][can_bicycle!='no'] {
+        motor/line-color: @nomotor-fill;
+        #tunnel { motor/line-color: lighten(@nomotor-fill, 10%); }
+        motor/line-width: @rdz12_living_street;
+        [zoom>=13] { motor/line-width: @rdz13_living_street; }
+        [zoom>=14] { motor/line-width: @rdz14_living_street; }
+        [zoom>=15] { motor/line-width: @rdz15_living_street; }
+        [zoom>=16] { motor/line-width: @rdz16_living_street; }
+        [zoom>=17] { motor/line-width: @rdz17_living_street; }
+        [zoom>=18] { motor/line-width: @rdz18_living_street; }
+        motor/line-dasharray: 6,6;
     }
     [cyclestreet='yes'] {
         line-color: @mixed-cycle-fill;
